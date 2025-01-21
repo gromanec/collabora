@@ -3,21 +3,21 @@
       <img src="/assets/trello-logo.svg" class="trello-main-logo" />
     </a>
     <div class="form-container">
-      <div class="login-header">Register to Trello</div>
+      <div class="login-header">Register to Collabora</div>
       <div class="errors"></div>
-      <form>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <input
           formControlName="email"
           type="email"
           placeholder="Email"
           class="login-input"
-        />
-        <input
+          />
+          <input
           formControlName="username"
           placeholder="Username"
           class="login-input"
-        />
-        <input
+          />
+          <input
           formControlName="password"
           type="password"
           placeholder="Password"
