@@ -12,11 +12,14 @@ export class HomeComponent implements OnInit, OnDestroy {
     constructor(private authService: AuthService, private router: Router){}
 
     ngOnInit(): void {
-        this.authService.isLogged$.subscribe(isLoggedIn => {
-            if (isLoggedIn){
-                this.router.navigateByUrl('/boards')
+        this.isLoggedInSubscription = this.authService.isLogged$
+        .subscribe(
+            (isLoggedIn) => {
+                if (isLoggedIn){
+                    //this.router.navigateByUrl('/boards');
+                }
             }
-        })
+        );
     }
 
     ngOnDestroy(): void {

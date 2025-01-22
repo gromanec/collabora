@@ -8,13 +8,19 @@ export class AuthGuardService implements CanActivate {
     constructor(private authService: AuthService, private router: Router){}
 
     canActivate(): Observable<boolean>{
-        return this.authService.isLogged$.pipe(map((isLoggedIn) => {
-            if(isLoggedIn){
-                return true;
-            }
-
-            this.router.navigateByUrl('/');
-            return false;
-        }))
+        console.log('AuthGuardService: Evaluando Acceso', this.authService.isLogged$);
+        
+        return this.authService.isLogged$.pipe(
+            //take(1),
+            map((isLoggedIn) => {
+                console.log('AuthGuardService: Valor emitido', isLoggedIn);
+                if(isLoggedIn){
+                    return true;
+                } 
+                console.log('AuthGuardService: Valor falso emitido', isLoggedIn);
+                this.router.navigateByUrl('/');
+                return false;
+            })
+        );
     }
 }
