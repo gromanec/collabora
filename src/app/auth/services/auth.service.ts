@@ -4,6 +4,7 @@ import { CurrentUserInterface } from "../types/currentUser.interface";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { RegisterRequestInterface } from "../types/registerRequest.interface";
+import { LoginRequestInterface } from "../types/loginRequestInterface";
 
 @Injectable()
 export class AuthService {
@@ -15,6 +16,11 @@ export class AuthService {
     getCurrentUser(): Observable<CurrentUserInterface>{
         const url = environment.apiUrl + "/user";
         return this.http.get<CurrentUserInterface>(url);
+    }
+
+    login(loginRequest: LoginRequestInterface): Observable<CurrentUserInterface>{
+        const url = environment.apiUrl + "/users/login";
+        return this.http.post<CurrentUserInterface>(url, loginRequest);
     }
 
     register(registerRequest: RegisterRequestInterface): Observable<CurrentUserInterface>{
