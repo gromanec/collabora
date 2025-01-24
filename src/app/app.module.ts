@@ -9,6 +9,8 @@ import { HomeModule } from './home/home.module';
 import { AuthInterceptor } from './auth/services/authinterceptor.service';
 import { BoardsModule } from './boards/boards.module';
 import { AuthService } from './auth/services/auth.service';
+import { BoardModule } from './board/board.module';
+import { SocketService } from './shared/services/socket.service';
 
 @NgModule({
   declarations: [
@@ -20,10 +22,12 @@ import { AuthService } from './auth/services/auth.service';
     AuthModule,
     HomeModule,
     BoardsModule,
+    BoardModule,
     HttpClientModule
   ],
   providers: [
     AuthService,
+    SocketService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

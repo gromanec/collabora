@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from "./auth/services/auth.service"
+import { SocketService } from './shared/services/socket.service';
 
 @Component({
   selector: 'app-root',
@@ -8,12 +9,12 @@ import { AuthService } from "./auth/services/auth.service"
 })
 
 export class AppComponent implements OnInit {
-  constructor(private authService: AuthService){};
+  constructor(private authService: AuthService, private socketService: SocketService){};
 
   ngOnInit(): void {
     this.authService.getCurrentUser().subscribe({
       next: (currentUser) => {
-        console.log('Currentt User', currentUser);
+        this.socketService.setupSocketConnection(currentUser);
         this.authService.setCurrentUser(currentUser);
       },
       error: (err) => {
